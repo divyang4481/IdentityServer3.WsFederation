@@ -178,6 +178,10 @@ namespace IdentityServer3.WsFederation
             // in order to determine redirect url wreply and wtrealm must be non-empty
             if (String.IsNullOrWhiteSpace(msg.Reply) || String.IsNullOrWhiteSpace(msg.GetParameter("wtrealm")))
             {
+                if (!String.IsNullOrWhiteSpace(msg.Reply))
+                {
+                    return RedirectToLogOut(msg.Reply);
+                }
                 return RedirectToLogOut();
             }
 
